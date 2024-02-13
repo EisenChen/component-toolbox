@@ -87,4 +87,5 @@ const props = defineProps({
 .linkable:hover {
     cursor: pointer;
     background-color: rgb(209, 92, 255);
-}</style>
+}
+</style>

@@ -2,23 +2,32 @@
   <!-- <img alt="Vue logo" src="./assets/logo.png">
   <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   <div>
-    <Paginator v-for="i in 100" total-page="100" :current-page="i" @toPage="toPage"></Paginator>
+    <button @click="sidebarSwitch">OPEN</button>
   </div>
+  <Sidebar :opened="sidebarIsOpened" @closed="sidebarSwitch"></Sidebar>
 </template>
 
 <script>
 //import HelloWorld from './components/HelloWorld.vue'
-import Paginator from './components/paginator/Paginator.vue';
+import Sidebar from './components/sidebar/Sidebar.vue'
 
 export default {
   name: 'App',
   components: {
     //HelloWorld
-    Paginator
+    Sidebar
+  },
+  data() {
+    return {
+      sidebarIsOpened: false
+    }
   },
   methods: {
     toPage(x) {
       console.log(x);
+    },
+    sidebarSwitch() {
+      this.sidebarIsOpened = !this.sidebarIsOpened;          
     }
   }
 }
@@ -32,5 +41,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+
+  height: 1000vh;
 }
 </style>
