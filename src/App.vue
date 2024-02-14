@@ -1,34 +1,44 @@
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png">
   <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-  <div>
-    <button @click="sidebarSwitch">OPEN</button>
+  
+  <div class="block">
+    <p>Should Refresh</p>
+    <p>{{ refreshItem }}</p>
   </div>
-  <Sidebar :opened="sidebarIsOpened" @closed="sidebarSwitch"></Sidebar>
+  <PullToRefresh @refresh="refresh"></PullToRefresh>
+  <div class="block">
+    <p>Not Refresh</p>
+    <p>{{ notRefreshItem }}</p>
+  </div>
 </template>
 
 <script>
 //import HelloWorld from './components/HelloWorld.vue'
-import Sidebar from './components/sidebar/Sidebar.vue'
+import PullToRefresh from './components/pull-to-refresh/PullToRefresh.vue'
+
 
 export default {
   name: 'App',
   components: {
     //HelloWorld
-    Sidebar
+    PullToRefresh
   },
   data() {
     return {
-      sidebarIsOpened: false
+      refreshItem: "",
+      notRefreshItem: ""
     }
   },
   methods: {
-    toPage(x) {
-      console.log(x);
-    },
-    sidebarSwitch() {
-      this.sidebarIsOpened = !this.sidebarIsOpened;          
+    refresh() {
+      this.refreshItem = new Date();
     }
+  },
+  mounted() {
+    let t = new Date();
+    this.refreshItem = t;
+    this.notRefreshItem = t;
   }
 }
 </script>
@@ -41,7 +51,23 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  height: 100vh;
+}
 
-  height: 1000vh;
+.block {
+  max-width: 400px;
+  max-height: 200px;
+  width: 100%;
+  height: 100%;
+  border: 1px solid;
+  margin: auto;
+  margin-bottom: 1rem;
+}
+
+.smallblock {
+  width: 100px;
+  height: 100px;
+  background-color: black;
+  margin: auto;
 }
 </style>
